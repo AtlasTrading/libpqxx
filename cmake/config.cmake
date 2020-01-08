@@ -81,13 +81,15 @@ else (def)
 endif (def)
 set(CMAKE_REQUIRED_QUIET OFF)
 
-set(AC_CONFIG_H_IN "${CMAKE_CURRENT_SOURCE_DIR}/include/pqxx/config.h.in")
+set(AC_CONFIG_H_IN "${CMAKE_CURRENT_SOURCE_DIR}/include/pqxx/config.h.in.orig")
 set(CM_CONFIG_H_IN "${CMAKE_CURRENT_BINARY_DIR}/include/pqxx/config.h.in")
 set(CM_CONFIG_PUB "${CMAKE_CURRENT_BINARY_DIR}/include/pqxx/config-public-compiler.h")
 set(CM_CONFIG_INT "${CMAKE_CURRENT_BINARY_DIR}/include/pqxx/config-internal-compiler.h")
+
 message(STATUS "Generating config.h")
+
 file(WRITE "${CM_CONFIG_H_IN}" "")
-file(STRINGS "${AC_CONFIG_H_IN}" lines)
+file(STRINGS "${AC_CONFIG_H_IN_TEMP}" lines)
 foreach (line ${lines})
   string(REGEX REPLACE "^#undef" "#cmakedefine" l "${line}")
   file(APPEND "${CM_CONFIG_H_IN}" "${l}\n")
