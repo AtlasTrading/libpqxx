@@ -46,4 +46,3 @@ win32/common
 **/test-suite.log
 *.cmake
 *CMakeFiles
-include/pqxx/config.h.in
